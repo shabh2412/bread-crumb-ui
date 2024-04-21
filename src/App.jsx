@@ -1,5 +1,6 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import './App.css';
+import Breadcrumb from './components/Breadcrumb';
 
 function App() {
   const breadcrumb_items = ["home", "products", "electronics", "laptops", "macbook air m2"];
@@ -10,33 +11,9 @@ function App() {
   }, []);
 
   return (
-    <>
-      <style>
-        {
-          `
-        .breadcrumb-container {
-          display: flex;
-          justify-content: start;
-          align-items: center;
-          gap: 4px;
-        }
-        .breadcrumb-container > p {
-          text-decoration: underline;
-          color: #fafafa;
-        }
-        `
-        }
-      </style>
-      <div className='breadcrumb-container'>
-        {
-          breadcrumb_items?.map((item, idx) => <React.Fragment key={`${item}-${idx}`} >
-            <p >{item}</p>
-            {(idx < breadcrumb_items?.length - 1) && ">"}
-          </React.Fragment>
-          )
-        }
-      </div>
-    </>
+    <div>
+      <Breadcrumb breadcrumb_items={breadcrumb_items} />
+    </div>
   );
 }
 
