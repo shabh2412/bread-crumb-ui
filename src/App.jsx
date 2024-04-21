@@ -1,35 +1,43 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useEffect } from 'react';
+import './App.css';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const breadcrumb_items = ["home", "products", "electronics", "laptops", "macbook air m2"];
+
+  useEffect(() => {
+    const new_list = breadcrumb_items?.filter(item => item?.length >= 5);
+    console.log(new_list);
+  }, []);
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+      <style>
+        {
+          `
+        .breadcrumb-container {
+          display: flex;
+          justify-content: start;
+          align-items: center;
+          gap: 4px;
+        }
+        .breadcrumb-container > p {
+          text-decoration: underline;
+          color: #fafafa;
+        }
+        `
+        }
+      </style>
+      <div className='breadcrumb-container'>
+        {
+          breadcrumb_items?.map((item, idx) => <React.Fragment key={`${item}-${idx}`} >
+            <p >{item}</p>
+            {(idx < breadcrumb_items?.length - 1) && ">"}
+          </React.Fragment>
+          )
+        }
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
